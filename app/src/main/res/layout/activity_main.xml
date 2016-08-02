@@ -18,7 +18,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="record"
         android:id="@+id/button2"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
@@ -28,10 +28,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="send"
         android:id="@+id/button4"
         android:layout_toLeftOf="@+id/button2"
         android:layout_toStartOf="@+id/button2"
         android:layout_alignBottom="@+id/button2"
         android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recive"
+        android:id="@+id/button5"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="recive"/>
 </RelativeLayout>
