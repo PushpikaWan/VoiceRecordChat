@@ -22,4 +22,10 @@
     <string name="Password">Password</string>
     <string name="Confirm_password">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="Category">Category</string>
+    <string name="title">Title</string>
+    <string name="record">Record</string>
+    <string name="timerVal">00:00:00</string>
+    <string name="stop">Stop</string>
+    <string name="play">Play</string>
 </resources>

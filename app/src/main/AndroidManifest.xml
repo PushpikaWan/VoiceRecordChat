@@ -32,7 +32,9 @@
         <activity android:name=".UploadToServer" />
         <activity android:name=".DownloadFromServer" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".UserRegister"></activity>
+        <activity android:name=".UserRegister" />
+        <activity android:name=".UserHomePage" />
+        <activity android:name=".AddPost"></activity>
     </application>
 
 </manifest>

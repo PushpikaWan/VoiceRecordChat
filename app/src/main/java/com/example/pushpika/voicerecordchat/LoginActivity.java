@@ -413,7 +413,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void go_home_page() {
-        Intent intent = new Intent(this, UploadToServer.class);
+        Intent intent = new Intent(this, UserHomePage.class);
         startActivity(intent);
     }
 
