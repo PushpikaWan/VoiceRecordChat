@@ -1,18 +1,35 @@
 package com.example.pushpika.voicerecordchat;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -21,7 +38,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class AddPost extends AppCompatActivity {
 
@@ -40,7 +62,15 @@ public class AddPost extends AppCompatActivity {
     private MediaRecorder myAudioRecorder;
     private String outputFile = null;
     private String selectedFilePath;
+    private EditText title_text;
+    private String Title,Category,User_ID,User_Name,Date_Time;
     ProgressDialog dialog;
+    private UserSendPost mAuthTask = null;
+    public static final int CONNECTION_TIMEOUT = 1000*15;
+    public String currentDateTimeString;
+    public  String fileName ;
+    String category_arr[] = {"Sport" , "Art" , "Other"};
+    Spinner sp;
 
 
     @Override
@@ -52,14 +82,41 @@ public class AddPost extends AppCompatActivity {
         stop = (Button) findViewById(R.id.stop_btn);
         record = (Button) findViewById(R.id.record_btn);
         post = (Button)findViewById(R.id.post_btn);
+        title_text = (EditText) findViewById(R.id.editText);
+        sp = (Spinner) findViewById(R.id.spinner2);
 
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordingmy.mp3";
+
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+        currentDateTimeString = s.format(new Date());
+        fileName =LoginActivity.user_ID+currentDateTimeString;
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName+".mp3";
         selectedFilePath = outputFile;
 
 
+
+        //category sniper
+        sp.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category_arr));
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                Category = sp.getSelectedItem().toString();
+
+
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        //
         myAudioRecorder = new MediaRecorder();
         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -258,7 +315,7 @@ public class AddPost extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "File Upload completed.", Toast.LENGTH_LONG).show();
-
+                            send_post_data();
                         }
                     });
                 }
@@ -289,5 +346,119 @@ public class AddPost extends AppCompatActivity {
             return serverResponseCode;
         }
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+
+
+
+    public void send_post_data() {
+
+        if (mAuthTask != null) {
+            return;
+        }
+
+        // Store values at the time of the login attempt.
+        Title= title_text.getText().toString();
+        //Category = "test";
+        User_ID= LoginActivity.user_ID;
+        User_Name= LoginActivity.Full_Name;
+        Date_Time = currentDateTimeString;
+        //AudioName=filename
+
+
+        boolean cancel = false;
+        View focusView = null;
+
+
+
+
+///contacts shouldn`t be empty
+        // Check for valid first name.
+        if (TextUtils.isEmpty(Title)) {
+            title_text.setError(getString(R.string.error_field_required));
+            focusView = title_text;
+            cancel = true;
+        }
+
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            mAuthTask = new UserSendPost();
+            mAuthTask.execute((Void) null);
+            Intent intent = new Intent(this, UserHomePage.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
+    public class UserSendPost extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("Title",Title));
+            dataToSend.add(new BasicNameValuePair("Category",Category));
+            dataToSend.add(new BasicNameValuePair("User_ID",User_ID));
+            dataToSend.add(new BasicNameValuePair("User_Name",User_Name));
+            dataToSend.add(new BasicNameValuePair("Audio_Name",fileName));
+            dataToSend.add(new BasicNameValuePair("Date_Time",Date_Time));
+
+            //hard code
+
+
+            //HttpParams httpRequestParams = new BasicHttpParams();
+            //HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+            //HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+            HttpParams httpRequestParams = getHttpRequestParams();
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post1 = new HttpPost(MainActivity.WEB_SERVER + "post_add.php");
+
+
+            try {
+                post1.setEntity(new UrlEncodedFormEntity(dataToSend));
+                client.execute(post1);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Error, Post failure", Toast.LENGTH_LONG).show();
+            }
+
+
+            return null;
+        }
+        private HttpParams getHttpRequestParams() {
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams,
+                    CONNECTION_TIMEOUT);
+            HttpConnectionParams.setSoTimeout(httpRequestParams,
+                    CONNECTION_TIMEOUT);
+            return httpRequestParams;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(),"Post successfully", Toast.LENGTH_LONG).show();
+
+
+//            progressDialog.dismiss();
+
+
+        }
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
