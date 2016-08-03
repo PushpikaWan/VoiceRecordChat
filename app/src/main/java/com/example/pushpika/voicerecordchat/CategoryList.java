@@ -7,31 +7,26 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class UserHomePage extends AppCompatActivity {
-
+public class CategoryList extends AppCompatActivity {
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_home_page);
-
+        setContentView(R.layout.activity_category_list);
 
         //intent declaration
-        final Intent intent1 = new Intent(this,AddPost.class);
-        final Intent intent2 = new Intent(this,CategoryList.class);
+        final Intent intent1 = new Intent(this,ShowPosts.class);
 
 
 
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list);
+        listView = (ListView) findViewById(R.id.list1);
 
         // Defined Array values to show in ListView
-        String[] values = new String[]{"Add Post",
-                "My Posts",
-                "View Posts",
+        String[] values = new String[]{" Sport",
+                "Art",
                 "Other"
         };
 
@@ -66,12 +61,13 @@ public class UserHomePage extends AppCompatActivity {
                     startActivity(intent1);
                 }
                 else if(itemPosition==1){
-                    startActivity(intent2);
+
                 }
+
 
             }
 
         });
     }
-
 }
+
