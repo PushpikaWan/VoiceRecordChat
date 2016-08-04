@@ -15,7 +15,7 @@ public class ShowPosts extends AppCompatActivity {
 
         if (fragment == null) {
             fragment = new CardFragment();
-            ;
+
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)
                     .commit();

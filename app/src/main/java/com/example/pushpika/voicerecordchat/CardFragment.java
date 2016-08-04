@@ -2,8 +2,10 @@ package com.example.pushpika.voicerecordchat;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,23 +24,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
 
 public class CardFragment extends Fragment {
 
+
     ArrayList<PostModule> listitems = new ArrayList<>();
     RecyclerView MyRecyclerView;
-    String Wonders[] = {"Chichen Itza","Christ the Redeemer","Great Wall of China","Machu Picchu","Petra","Taj Mahal","Colosseum"};
+    //String Wonders[] = {"Chichen Itza","Christ the Redeemer","Great Wall of China","Machu Picchu","Petra","Taj Mahal","Colosseum"};
     //int  Images[] = {R.drawable.mp3_1,R.drawable.mp3_1,R.drawable.mp3_1,R.drawable.mp3_1,R.drawable.mp3_1,R.drawable.mp3_1,R.drawable.mp3_1};
-    int  Images[] = {R.drawable.chichen_itza,R.drawable.christ_the_redeemer,R.drawable.great_wall_of_china,R.drawable.machu_picchu,R.drawable.petra,R.drawable.taj_mahal,R.drawable.colosseum};
+    //int  Images[] = {R.drawable.chichen_itza,R.drawable.christ_the_redeemer,R.drawable.great_wall_of_china,R.drawable.machu_picchu,R.drawable.petra,R.drawable.taj_mahal,R.drawable.colosseum};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeList();
-        getActivity().setTitle("7 Wonders of the Modern World");
+        getActivity().setTitle(CategoryList.choose_category+" Posts");
     }
 
     @Override
@@ -57,6 +61,9 @@ public class CardFragment extends Fragment {
 
         return view;
     }
+
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -82,7 +89,7 @@ public class CardFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, int position) {
-
+            holder.title.setText(list.get(position).getCardName());
             holder.titleTextView.setText(list.get(position).getCardName());
             holder.coverImageView.setImageResource(list.get(position).getImageResourceId());
             holder.coverImageView.setTag(list.get(position).getImageResourceId());
@@ -166,12 +173,12 @@ public class CardFragment extends Fragment {
     public void initializeList() {
         listitems.clear();
 
-        for(int i =0;i<7;i++){
+        for(int i =0;i<CategoryList.current_post_object_set.Number_of_posts;i++){
 
 
             PostModule item = new PostModule();
-            item.setCardName(Wonders[i]);
-            item.setImageResourceId(Images[i]);
+            item.setCardName(CategoryList.current_post_object_set.Title_List.get(i));
+            item.setImageResourceId(CategoryList.current_post_object_set.Image_List.get(i));
             item.setIsfav(0);
             item.setIsturned(0);
             listitems.add(item);
