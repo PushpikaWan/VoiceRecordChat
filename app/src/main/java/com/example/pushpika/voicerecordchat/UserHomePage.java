@@ -24,7 +24,6 @@ public class UserHomePage extends AppCompatActivity {
         final Intent intent2 = new Intent(this,CategoryList.class);
 
 
-
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.list);
 
@@ -67,6 +66,9 @@ public class UserHomePage extends AppCompatActivity {
                 }
                 else if(itemPosition==1){
                     startActivity(intent2);
+                }
+                else if (itemPosition==2){
+                    //
                 }
 
             }

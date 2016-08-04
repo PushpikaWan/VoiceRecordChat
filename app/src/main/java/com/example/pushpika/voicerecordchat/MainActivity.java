@@ -26,20 +26,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void record(View view){
-        //Intent intent = new Intent(this,voiceCapture.class);
-        Intent intent = new Intent(this,UploadToServer.class);
-        startActivity(intent);
-    }
 
-    public void send(View view){
-        Intent intent = new Intent(this,voiceCapture.class);
-        startActivity(intent);
-    }
-
-    public void recive(View view){
-        Intent intent = new Intent(this,DownloadFromServer.class);
-        startActivity(intent);
-    }
 
 }
