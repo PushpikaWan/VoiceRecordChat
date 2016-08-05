@@ -116,7 +116,7 @@ public class CategoryList extends AppCompatActivity {
         public boolean stmt = true;
 
         LoadPosts() {
-            User_ID= LoginActivity.user_ID;
+            User_ID= MainActivity.User_ID;
             category=CategoryList.choose_category;
         }
 

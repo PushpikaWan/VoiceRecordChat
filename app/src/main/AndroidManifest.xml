@@ -32,12 +32,13 @@
         <activity android:name=".voiceCapture" />
         <activity android:name=".UploadToServer" />
         <activity android:name=".DownloadFromServer" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".UserRegister" />
         <activity android:name=".UserHomePage" />
         <activity android:name=".AddPost" />
         <activity android:name=".CategoryList" />
-        <activity android:name=".ShowPosts"></activity>
+        <activity android:name=".ShowPosts" />
+        <activity android:name=".EmailAddressEntryActivity" />
+        <activity android:name=".FirstLoginActivity"></activity>
     </application>
 
 </manifest>

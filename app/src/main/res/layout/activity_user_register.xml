@@ -15,88 +15,30 @@ android:gravity="center_horizontal">
     android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:layout_marginBottom="8dp" android:visibility="gone" />
 
-<ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
     <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="vertical">
 
         <TextView
-            android:text="@string/First_name"
-            android:id="@+id/First_name_label"
+            android:text="@string/user_name"
+            android:id="@+id/Full_name_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
             />
 
         <EditText
-            android:hint="@string/First_name"
-            android:id = "@+id/First_name"
+            android:hint="@string/user_name"
+            android:id = "@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:singleLine="true"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:text="@string/Last_name"
-            android:id="@+id/Last_name_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-        <EditText
-            android:hint="@string/Last_name"
-            android:id="@+id/Last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="75dp"/>
 
 
-
-        <TextView
-            android:text="@string/Email_address"
-            android:id="@+id/Email_address_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-        <AutoCompleteTextView android:id="@+id/Email_address" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:hint="@string/prompt_email"
-            android:inputType="textEmailAddress" android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:text="@string/Password"
-            android:id="@+id/password_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-        <EditText android:id="@+id/Password" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:hint="@string/prompt_password"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionUnspecified" android:inputType="textPassword"
-            android:maxLines="1" android:singleLine="true"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:text="@string/Confirm_password"
-            android:id="@+id/confirm_password_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-        <EditText android:id="@+id/Confirm_password" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:hint="@string/Confirm_password"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionUnspecified" android:inputType="textPassword"
-            android:maxLines="1" android:singleLine="true"
-            android:layout_marginBottom="5dp" />
 
         <Button android:id="@+id/bRegister" style="?android:textAppearanceSmall"
             android:layout_width="match_parent" android:layout_height="45dp"
@@ -107,7 +49,6 @@ android:gravity="center_horizontal">
             android:background="#cc2121"/>
 
     </LinearLayout>
-</ScrollView>
 
 </LinearLayout>
 

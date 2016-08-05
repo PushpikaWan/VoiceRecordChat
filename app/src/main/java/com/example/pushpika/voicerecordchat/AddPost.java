@@ -91,7 +91,7 @@ public class AddPost extends AppCompatActivity {
 
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         currentDateTimeString = s.format(new Date());
-        fileName =LoginActivity.user_ID+currentDateTimeString;
+        fileName =MainActivity.User_ID+currentDateTimeString;
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName+".mp3";
         selectedFilePath = outputFile;
 
@@ -361,8 +361,8 @@ public class AddPost extends AppCompatActivity {
         // Store values at the time of the login attempt.
         Title= title_text.getText().toString();
         //Category = "test";
-        User_ID= LoginActivity.user_ID;
-        User_Name= LoginActivity.Full_Name;
+        User_ID= MainActivity.User_ID;
+        User_Name= MainActivity.User_Name;
         Date_Time = currentDateTimeString;
         //AudioName=filename
 
