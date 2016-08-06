@@ -37,4 +37,8 @@
     <string name="user_name">User Name</string>
     <string name="record_b">Record</string>
     <string name="listen">Listen</string>
+    <string name="play_audio">Play / Stop</string>
+    <string name="reply">Reply</string>
+    <string name="like">Like</string>
+    <string name="download">Download</string>
 </resources>

@@ -38,7 +38,10 @@
         <activity android:name=".ShowPosts" />
         <activity android:name=".EmailAddressEntryActivity" />
         <activity android:name=".FirstLoginActivity" />
-        <activity android:name=".SelectType"></activity>
+        <activity android:name=".SelectType" />
+        <activity android:name=".AudioClipActivity" />
+        <activity android:name=".StreamingMp3Player"
+            android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>
