@@ -20,6 +20,8 @@ public class ReplyMethods extends AppCompatActivity {
     }
 
     public void view_reply(View view){
-
+        Intent intent2 = new Intent(this,ViewComments.class);
+        startActivity(intent2);
     }
+
 }
