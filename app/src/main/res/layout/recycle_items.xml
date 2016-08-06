@@ -67,7 +67,33 @@
                     android:text="New Text"
                     android:id="@+id/hiddenText"
                     android:visibility="gone"
-                    android:layout_gravity="right|bottom" />
+                    android:layout_gravity="right|center" />
+
+                <Button
+                    android:layout_width="172dp"
+                    android:layout_height="73dp"
+                    android:text="Go To Audio Clip"
+                    android:onClick="go_audio"
+                    android:id="@+id/GoClipBtn"
+                    android:layout_gravity="right|bottom"
+                    />
+
+                <TextView
+                    android:layout_width="167dp"
+                    android:layout_height="39dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Small Text"
+                    android:id="@+id/author_text"
+                    android:layout_gravity="right|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Small Text"
+                    android:id="@+id/hiddenText2"
+                    android:visibility="gone"
+                    android:layout_gravity="center" />
             </FrameLayout>
         </LinearLayout>
 

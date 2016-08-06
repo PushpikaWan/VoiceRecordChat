@@ -5,10 +5,12 @@ package com.example.pushpika.voicerecordchat;
  */
 public class PostModule {
 
-    String cardName,cardName2;
+    String cardName,cardName2,cardName3,cardName4;
+
     int imageResourceId;
     int isfav;
     int isturned;
+
 
     public int getIsturned() {
         return isturned;
@@ -32,6 +34,12 @@ public class PostModule {
     public String getCardName2() {
         return cardName2;
     }
+    public String getCardName3() {
+        return cardName3;
+    }
+    public String getCardName4() {
+        return cardName4;
+    }
 
 
     public void setCardName(String cardName) {
@@ -40,6 +48,13 @@ public class PostModule {
     public void setCardName2(String cardName2) {
         this.cardName2 = cardName2;
     }
+    public void setCardName3(String cardName3) {
+        this.cardName3 = cardName3;
+    }
+    public void setCardName4(String cardName4) {
+        this.cardName4 = cardName4;
+    }
+
 
     public int getImageResourceId() {
         return imageResourceId;

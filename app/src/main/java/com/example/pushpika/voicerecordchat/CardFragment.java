@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class CardFragment extends Fragment {
 
     ArrayList<PostModule> listitems = new ArrayList<>();
     RecyclerView MyRecyclerView;
+    public static AudioClipObject audioClipObject;
 
 
 
@@ -119,7 +121,9 @@ public class CardFragment extends Fragment {
         public void onBindViewHolder(final MyViewHolder holder, int position) {
             holder.title.setText(list.get(position).getCardName());
             holder.titleTextView.setText(list.get(position).getCardName());
-            holder.hiddenTextView.setText(list.get(position).getCardName2());
+            holder.author.setText(list.get(position).getCardName4());
+            holder.hiddenTextView1.setText(list.get(position).getCardName2());
+            holder.hiddenTextView2.setText(list.get(position).getCardName3());
             holder.coverImageView.setImageResource(list.get(position).getImageResourceId());
             holder.coverImageView.setTag(list.get(position).getImageResourceId());
             holder.likeImageView.setTag(R.drawable.ic_like);
@@ -132,23 +136,31 @@ public class CardFragment extends Fragment {
         }
     }
 
+
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView titleTextView;
         public TextView title;
-        public TextView hiddenTextView;
+        public TextView author;
+        public TextView hiddenTextView1;
+        public TextView hiddenTextView2;
         public ImageView coverImageView;
         public ImageView likeImageView;
         public ImageView shareImageView;
+        public Button goAudioBtn;
 
 
         public MyViewHolder(View v) {
             super(v);
             titleTextView = (TextView) v.findViewById(R.id.titleTextView);
             title = (TextView) v.findViewById(R.id.textView3);
-            hiddenTextView = (TextView) v.findViewById(R.id.hiddenText);
+            author = (TextView) v.findViewById(R.id.author_text);
+            hiddenTextView1 = (TextView) v.findViewById(R.id.hiddenText);
+            hiddenTextView2 = (TextView) v.findViewById(R.id.hiddenText2);
             coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
             likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
+            goAudioBtn = (Button)v.findViewById(R.id.GoClipBtn);
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
             likeImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,7 +197,7 @@ public class CardFragment extends Fragment {
                     //making sure the download directory exists
                     checkAndCreateDirectory("/my_downloads");
                     fileName = (String) titleTextView.getText()+".mp3";
-                    fileURL = MainActivity.WEB_SERVER+"uploads/"+hiddenTextView.getText()+".mp3";
+                    fileURL = MainActivity.WEB_SERVER+"uploads/"+hiddenTextView1.getText()+".mp3";
 
                     //executing the asynctask
                     new DownloadFileAsync().execute(fileURL);
@@ -210,26 +222,49 @@ public class CardFragment extends Fragment {
                 }
             });
 
+            goAudioBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String title = titleTextView.getText().toString();
+                    String category = UserHomePage.Current_Category;
+                    String postid = hiddenTextView2.getText().toString() ;
+                    String audioid = hiddenTextView1.getText().toString();
 
+                    Log.v("Button clicked: ",title+" "+category+" "+postid+" "+audioid+" ");
+                    audioClipObject = new AudioClipObject(title,category,postid,audioid);
+
+                }
+            });
 
         }
+
     }
 
 
 
     public void initializeList() {
         listitems.clear();
+        if(SelectType.current_post_object_set!=null) {
 
-        for(int i =0;i<SelectType.current_post_object_set.Number_of_posts;i++){
+            for (int i = 0; i < SelectType.current_post_object_set.Number_of_posts; i++) {
 
 
-            PostModule item = new PostModule();
-            item.setCardName(SelectType.current_post_object_set.Title_List.get(i));
-            item.setImageResourceId(SelectType.current_post_object_set.Image_List.get(i));
-            item.setCardName2(SelectType.current_post_object_set.Audio_Name_List.get(i));
-            item.setIsfav(0);
-            item.setIsturned(0);
-            listitems.add(item);
+                PostModule item = new PostModule();
+                item.setCardName(SelectType.current_post_object_set.Title_List.get(i));
+                item.setImageResourceId(SelectType.current_post_object_set.Image_List.get(i));
+                item.setCardName2(SelectType.current_post_object_set.Audio_Name_List.get(i));
+                item.setCardName3(SelectType.current_post_object_set.Post_ID_List.get(i));
+                item.setCardName4(SelectType.current_post_object_set.User_Name_List.get(i));
+                item.setIsfav(0);
+                item.setIsturned(0);
+                listitems.add(item);
+
+            }
+        }
+
+        else{
+            Log.d("Log tag","Error connection");
+            //Intent home = new Intent(this,UserHomePage.class);
 
         }
     }
