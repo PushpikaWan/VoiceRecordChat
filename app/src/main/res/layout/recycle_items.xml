@@ -104,12 +104,25 @@
             android:gravity="center|right"
             android:orientation="horizontal">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textViewLikeCount" />
+
             <ImageView
                 android:id="@+id/likeImageView"
                 android:layout_width="60dip"
                 android:layout_height="60dip"
                 android:padding="8dp"
                 android:src="@drawable/ic_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textViewCommentCount" />
 
             <ImageView
                 android:id="@+id/shareImageView"
@@ -118,6 +131,7 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_share"
                 android:contentDescription="none"/>
+
         </LinearLayout>
 
     </LinearLayout>

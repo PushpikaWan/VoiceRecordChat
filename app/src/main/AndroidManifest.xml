@@ -46,7 +46,10 @@
         <activity android:name=".AddComment" />
         <activity android:name=".ReplyMethods" />
         <activity android:name=".ViewComments" />
-        <activity android:name=".StreamingMp3PlayerComments" android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".StreamingMp3PlayerComments"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".UserProfile" />
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ public class UserHomePage extends AppCompatActivity {
 
         //intent declaration
         final Intent intent1 = new Intent(this,SelectType.class);
-
+        final Intent intent2 = new Intent(this,UserProfile.class);
 
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.list);
@@ -31,7 +31,8 @@ public class UserHomePage extends AppCompatActivity {
         String[] values = new String[]{"Sport",
                 "Educational",
                 "Entertainment",
-                "Political"
+                "Political",
+                "Profile"
         };
 
 
@@ -75,6 +76,11 @@ public class UserHomePage extends AppCompatActivity {
                 else if (itemPosition==3){
                     Current_Category="Political";
                     startActivity(intent1);
+                    finish();
+                }
+                else if (itemPosition==4){
+                    Current_Category="Profile";
+                    startActivity(intent2);
                     finish();
                 }
 

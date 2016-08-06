@@ -10,17 +10,35 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AudioClipActivity extends AppCompatActivity {
     //initialize our progress dialog/bar
     private ProgressDialog mProgressDialog;
     public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
-
+    public static final int CONNECTION_TIMEOUT = 1000*15;
+    private UserLikeTask mAuthTask = null;
     //initialize root directory
     File rootDir = Environment.getExternalStorageDirectory();
 
@@ -46,7 +64,9 @@ public class AudioClipActivity extends AppCompatActivity {
     }
 
     public void Like(View view){
-
+        mAuthTask = new UserLikeTask();
+        mAuthTask.execute((Void) null);
+        //Toast.makeText(getApplicationContext(),"Like button clicked", Toast.LENGTH_LONG).show();
     }
 
     public void Download(View view){
@@ -63,12 +83,14 @@ public class AudioClipActivity extends AppCompatActivity {
     }
 
 
+
     //this is our download file asynctask
     class DownloadFileAsync extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
             try {
+                Log.v("like activated"," yeah");
                 //connecting to url
                 URL u = new URL(fileURL);
                 HttpURLConnection c = (HttpURLConnection) u.openConnection();
@@ -129,27 +151,100 @@ public class AudioClipActivity extends AppCompatActivity {
             new_dir.mkdirs();
         }
     }
-/*
 
- //our progress bar settings
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_DOWNLOAD_PROGRESS: //we set this to 0
-                mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setMessage("Downloading file");
-                mProgressDialog.setIndeterminate(false);
-                mProgressDialog.setMax(100);
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                mProgressDialog.setCancelable(true);
-                mProgressDialog.show();
-                return mProgressDialog;
-            default:
-                return null;
+
+
+    public class UserLikeTask extends AsyncTask<Void, Void, Boolean> {
+
+
+        public boolean stmt = true;
+
+        UserLikeTask() {
+
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("User_ID", MainActivity.User_ID));
+            dataToSend.add(new BasicNameValuePair("User_Name", MainActivity.User_Name));
+            dataToSend.add(new BasicNameValuePair("Post_ID",CardFragment.audioClipObject.Post_ID));
+
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(MainActivity.WEB_SERVER + "like_add.php");
+
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));
+                HttpResponse httpResponse = client.execute(post);
+                HttpEntity entity= httpResponse.getEntity();
+                String result = EntityUtils.toString(entity);
+                JSONObject jObject = new JSONObject(result);
+
+                if(jObject.length()!=0){
+                    Log.v("happened", "2");
+                    //Log.v("ha records",jObject.getString("records[0].User_ID") );
+                    //Log.v("ha records",jObject.getString("records[0].Post_ID") );
+                    //Log.v("ha likes",jObject.getString("liked") );
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.v("happened", "3");
+                return false;
+
+                //return false;
+            }
+
+            return stmt;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+
+            mAuthTask = null;
+            //showProgress(false);
+
+
+            if (success) {
+
+                load_view();
+
+            } else {
+
+                Toast.makeText(getApplicationContext(), "data sending error.. already liked", Toast.LENGTH_LONG).show();
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ////////////////////////////////////////////////////////////////////////////////
+
+            }
         }
 
 
- */
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            //showProgress(false);
+        }
+    }
+
+    private void load_view() {
+        //nothing load only
+    }
+
 
 
 }

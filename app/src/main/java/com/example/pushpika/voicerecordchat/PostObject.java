@@ -18,11 +18,14 @@ public class PostObject {
     List<Integer> Image_List ;
     List<String> Audio_Name_List;
     List<String> Date_Time_List;
+    List<String> Like_Count_List;
+    List<String> Comment_Count_List;
+
 
 
 
     public PostObject(Integer Number_of_posts,List<String> Post_ID_List, List<String> Title_List,List<String> User_ID_List,List<String> User_Name_List,
-                      List<Integer> Image_List,List<String> Audio_Name_List, List<String> Date_Time_List){
+                      List<Integer> Image_List,List<String> Audio_Name_List, List<String> Date_Time_List,List<String> Like_Count_List,List<String> Comment_Count_List){
 
         this.Number_of_posts = Number_of_posts;
         this.Post_ID_List=Post_ID_List;
@@ -32,6 +35,8 @@ public class PostObject {
         this.Image_List = Image_List;
         this.Audio_Name_List = Audio_Name_List;
         this.Date_Time_List = Date_Time_List;
+        this.Like_Count_List = Like_Count_List;
+        this.Comment_Count_List = Comment_Count_List;
     }
 
 

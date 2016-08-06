@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -26,29 +29,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectType extends AppCompatActivity {
+public class UserProfile extends AppCompatActivity {
 
-    private LoadPosts mAuthTask = null;
-    public static final int CONNECTION_TIMEOUT = 1000*15;
-    public static PostObject current_post_object_set;
-    public boolean waiting;
+        private LoadPostsMY mAuthTask = null;
+        public static final int CONNECTION_TIMEOUT = 1000*15;
+        public static PostObject current_post_object_setMY;
+        public boolean waiting;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_type);
-        waiting = true;
-        mAuthTask = new LoadPosts();
-        mAuthTask.execute((Void) null);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_user_profile);
+            waiting = true;
+            mAuthTask = new LoadPostsMY();
+            mAuthTask.execute((Void) null);
 
-    }
+        }
 
-    public void go_record(View view){
+    public void go_notification(View view){
         Intent intent1 = new Intent(this,AddPost.class);
         startActivity(intent1);
     }
 
-    public void go_listen(View view){
+    public void go_myposts(View view){
         if(!waiting) {
             Intent intent2 = new Intent(this, ShowPosts.class);
             startActivity(intent2);
@@ -64,15 +67,13 @@ public class SelectType extends AppCompatActivity {
     //get post details from db
 
 
-    public class LoadPosts extends AsyncTask<Void, Void, Boolean> {
+    public class LoadPostsMY extends AsyncTask<Void, Void, Boolean> {
 
         private final String User_ID;
-        private final String category;
         public boolean stmt = true;
 
-        LoadPosts() {
+        LoadPostsMY() {
             User_ID= MainActivity.User_ID;
-            category=UserHomePage.Current_Category;
         }
 
         @Override
@@ -82,7 +83,6 @@ public class SelectType extends AppCompatActivity {
 
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
             dataToSend.add(new BasicNameValuePair("User_ID", User_ID));
-            dataToSend.add(new BasicNameValuePair("Category",category ));
             Log.v("happened user id", User_ID);
 
             HttpParams httpRequestParams = new BasicHttpParams();
@@ -141,7 +141,7 @@ public class SelectType extends AppCompatActivity {
                         Comment_Count_List.add(comment_count);
                     }
 
-                    current_post_object_set = new PostObject(cast.length(),Post_ID_List,Title_List
+                    current_post_object_setMY = new PostObject(cast.length(),Post_ID_List,Title_List
                             ,User_ID_List,User_Name_List,Image_List,Audio_Name_List,Date_Time_List,Like_Count_List,Comment_Count_List);
 
                     waiting=false;

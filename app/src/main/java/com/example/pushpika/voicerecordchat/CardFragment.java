@@ -117,6 +117,8 @@ public class CardFragment extends Fragment {
             holder.author.setText(list.get(position).getCardName4());
             holder.hiddenTextView1.setText(list.get(position).getCardName2());
             holder.hiddenTextView2.setText(list.get(position).getCardName3());
+            holder.likes.setText(list.get(position).getCardName5());
+            holder.comments.setText(list.get(position).getCardName6());
             holder.coverImageView.setImageResource(list.get(position).getImageResourceId());
             holder.coverImageView.setTag(list.get(position).getImageResourceId());
             holder.likeImageView.setTag(R.drawable.ic_like);
@@ -138,6 +140,8 @@ public class CardFragment extends Fragment {
         public TextView author;
         public TextView hiddenTextView1;
         public TextView hiddenTextView2;
+        public TextView likes;
+        public TextView comments;
         public ImageView coverImageView;
         public ImageView likeImageView;
         public ImageView shareImageView;
@@ -151,6 +155,8 @@ public class CardFragment extends Fragment {
             author = (TextView) v.findViewById(R.id.author_text);
             hiddenTextView1 = (TextView) v.findViewById(R.id.hiddenText);
             hiddenTextView2 = (TextView) v.findViewById(R.id.hiddenText2);
+            likes = (TextView) v.findViewById(R.id.textViewLikeCount);
+            comments = (TextView) v.findViewById(R.id.textViewCommentCount);
             coverImageView = (ImageView) v.findViewById(R.id.coverImageView);
             likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
             goAudioBtn = (Button)v.findViewById(R.id.GoClipBtn);
@@ -239,6 +245,9 @@ public class CardFragment extends Fragment {
                 item.setCardName2(SelectType.current_post_object_set.Audio_Name_List.get(i));
                 item.setCardName3(SelectType.current_post_object_set.Post_ID_List.get(i));
                 item.setCardName4(SelectType.current_post_object_set.User_Name_List.get(i));
+                item.setCardName5(SelectType.current_post_object_set.Like_Count_List.get(i));
+                item.setCardName6(SelectType.current_post_object_set.Comment_Count_List.get(i));
+
                 item.setIsfav(0);
                 item.setIsturned(0);
                 listitems.add(item);

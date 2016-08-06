@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     public static String WEB_SERVER="http://mywall.esy.es/";
     public static String User_ID,User_Name,Email_Address;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         User_ID = settings.getString("User_ID","no");
         User_Name = settings.getString("User_Name","no");
         Email_Address = settings.getString("Email_Address","no");
+
 
 
         Log.v("Data check","successfully");
