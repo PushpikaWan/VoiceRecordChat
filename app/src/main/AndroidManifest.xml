@@ -40,8 +40,11 @@
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".SelectType" />
         <activity android:name=".AudioClipActivity" />
-        <activity android:name=".StreamingMp3Player"
-            android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".StreamingMp3Player"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".AddComment" />
+        <activity android:name=".ReplyMethods"></activity>
     </application>
 
 </manifest>

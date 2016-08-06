@@ -41,4 +41,6 @@
     <string name="reply">Reply</string>
     <string name="like">Like</string>
     <string name="download">Download</string>
+    <string name="add_reply">Add Reply</string>
+    <string name="view_replies">View Replies</string>
 </resources>
