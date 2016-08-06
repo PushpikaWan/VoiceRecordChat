@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class UserHomePage extends AppCompatActivity {
 
     ListView listView;
+    public static String Current_Category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,25 +21,20 @@ public class UserHomePage extends AppCompatActivity {
 
 
         //intent declaration
-        final Intent intent1 = new Intent(this,AddPost.class);
-        final Intent intent2 = new Intent(this,CategoryList.class);
+        final Intent intent1 = new Intent(this,SelectType.class);
 
 
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.list);
 
         // Defined Array values to show in ListView
-        String[] values = new String[]{"Add Post",
-                "My Posts",
-                "View Posts",
-                "Other"
+        String[] values = new String[]{"Sport",
+                "Educational",
+                "Entertainment",
+                "Political"
         };
 
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -62,13 +58,24 @@ public class UserHomePage extends AppCompatActivity {
 
 
                 if(itemPosition==0){
+                    Current_Category="Sport";
                     startActivity(intent1);
+                    finish();
                 }
                 else if(itemPosition==1){
-                    startActivity(intent2);
+                    Current_Category="Educational";
+                    startActivity(intent1);
+                    finish();
                 }
                 else if (itemPosition==2){
-                    //
+                    Current_Category="Entertainment";
+                    startActivity(intent1);
+                    finish();
+                }
+                else if (itemPosition==3){
+                    Current_Category="Political";
+                    startActivity(intent1);
+                    finish();
                 }
 
             }

@@ -68,7 +68,7 @@ public class CardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeList();
-        getActivity().setTitle(CategoryList.choose_category+" Posts");
+        getActivity().setTitle(UserHomePage.Current_Category+" Posts");
 
 
     }
@@ -220,13 +220,13 @@ public class CardFragment extends Fragment {
     public void initializeList() {
         listitems.clear();
 
-        for(int i =0;i<CategoryList.current_post_object_set.Number_of_posts;i++){
+        for(int i =0;i<SelectType.current_post_object_set.Number_of_posts;i++){
 
 
             PostModule item = new PostModule();
-            item.setCardName(CategoryList.current_post_object_set.Title_List.get(i));
-            item.setImageResourceId(CategoryList.current_post_object_set.Image_List.get(i));
-            item.setCardName2(CategoryList.current_post_object_set.Audio_Name_List.get(i));
+            item.setCardName(SelectType.current_post_object_set.Title_List.get(i));
+            item.setImageResourceId(SelectType.current_post_object_set.Image_List.get(i));
+            item.setCardName2(SelectType.current_post_object_set.Audio_Name_List.get(i));
             item.setIsfav(0);
             item.setIsturned(0);
             listitems.add(item);

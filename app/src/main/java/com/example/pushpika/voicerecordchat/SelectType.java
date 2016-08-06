@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -29,81 +26,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryList extends AppCompatActivity {
-    ListView listView;
-    //private View mProgressView;
+public class SelectType extends AppCompatActivity {
+
     private LoadPosts mAuthTask = null;
-    public static String choose_category=" ";
     public static final int CONNECTION_TIMEOUT = 1000*15;
     public static PostObject current_post_object_set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_list);
-
-        //destroy current post object
-        current_post_object_set=null;
-
-        // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list1);
-
-        // Defined Array values to show in ListView
-        String[] values = new String[]{" Sport",
-                "Art",
-                "Other"
-        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) listView.getItemAtPosition(position);
-
-
-                if(itemPosition==0){
-                    choose_category="Sport";
-                    mAuthTask = new LoadPosts();
-                    mAuthTask.execute((Void) null);
-
-
-                }
-                else if(itemPosition==1){
-                    choose_category="Art";
-                    mAuthTask = new LoadPosts();
-                    mAuthTask.execute((Void) null);
-                }
-                else if(itemPosition==2){
-                    choose_category="Other";
-                    mAuthTask = new LoadPosts();
-                    mAuthTask.execute((Void) null);
-                }
-
-
-            }
-
-        });
+        setContentView(R.layout.activity_select_type);
+        mAuthTask = new LoadPosts();
+        mAuthTask.execute((Void) null);
     }
+
+    public void go_record(View view){
+        Intent intent1 = new Intent(this,AddPost.class);
+        startActivity(intent1);
+    }
+
+    public void go_listen(View view){
+        Intent intent2 = new Intent(this,ShowPosts.class);
+        startActivity(intent2);
+    }
+
+
 
 
     //get post details from db
@@ -117,7 +64,7 @@ public class CategoryList extends AppCompatActivity {
 
         LoadPosts() {
             User_ID= MainActivity.User_ID;
-            category=CategoryList.choose_category;
+            category=UserHomePage.Current_Category;
         }
 
         @Override
@@ -181,7 +128,7 @@ public class CategoryList extends AppCompatActivity {
                     }
 
                     current_post_object_set = new PostObject(cast.length(),Post_ID_List,Title_List
-                                ,User_ID_List,User_Name_List,Image_List,Audio_Name_List,Date_Time_List);
+                            ,User_ID_List,User_Name_List,Image_List,Audio_Name_List,Date_Time_List);
 
                 }
 
@@ -232,13 +179,9 @@ public class CategoryList extends AppCompatActivity {
     }
 
     private void load_view() {
-        final Intent intent1 = new Intent(this,ShowPosts.class);
-        startActivity(intent1);
+        //nothing load only
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////
-
 
 }
-

@@ -35,10 +35,10 @@
         <activity android:name=".UserRegister" />
         <activity android:name=".UserHomePage" />
         <activity android:name=".AddPost" />
-        <activity android:name=".CategoryList" />
         <activity android:name=".ShowPosts" />
         <activity android:name=".EmailAddressEntryActivity" />
-        <activity android:name=".FirstLoginActivity"></activity>
+        <activity android:name=".FirstLoginActivity" />
+        <activity android:name=".SelectType"></activity>
     </application>
 
 </manifest>

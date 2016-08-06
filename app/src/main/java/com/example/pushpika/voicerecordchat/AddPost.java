@@ -69,8 +69,7 @@ public class AddPost extends AppCompatActivity {
     public static final int CONNECTION_TIMEOUT = 1000*15;
     public String currentDateTimeString;
     public  String fileName ;
-    String category_arr[] = {"Sport" , "Art" , "Other"};
-    Spinner sp;
+
 
 
     @Override
@@ -83,7 +82,7 @@ public class AddPost extends AppCompatActivity {
         record = (Button) findViewById(R.id.record_btn);
         post = (Button)findViewById(R.id.post_btn);
         title_text = (EditText) findViewById(R.id.editText);
-        sp = (Spinner) findViewById(R.id.spinner2);
+
 
         stop.setEnabled(false);
         play.setEnabled(false);
@@ -94,27 +93,6 @@ public class AddPost extends AppCompatActivity {
         fileName =MainActivity.User_ID+currentDateTimeString;
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName+".mp3";
         selectedFilePath = outputFile;
-
-
-
-        //category sniper
-        sp.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, category_arr));
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                // TODO Auto-generated method stub
-
-                Category = sp.getSelectedItem().toString();
-
-
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
 
         //
         myAudioRecorder = new MediaRecorder();
@@ -404,7 +382,7 @@ public class AddPost extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
             dataToSend.add(new BasicNameValuePair("Title",Title));
-            dataToSend.add(new BasicNameValuePair("Category",Category));
+            dataToSend.add(new BasicNameValuePair("Category",UserHomePage.Current_Category));
             dataToSend.add(new BasicNameValuePair("User_ID",User_ID));
             dataToSend.add(new BasicNameValuePair("User_Name",User_Name));
             dataToSend.add(new BasicNameValuePair("Audio_Name",fileName));
