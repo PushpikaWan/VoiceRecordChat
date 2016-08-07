@@ -47,11 +47,11 @@ public class UserProfile extends AppCompatActivity {
         }
 
     public void go_notification(View view){
-        Intent intent1 = new Intent(this,AddPost.class);
+        Intent intent1 = new Intent(this,NotificationShow.class);
         startActivity(intent1);
     }
 
-    public void go_myposts(View view){
+    public void go_my_posts(View view){
         if(!waiting) {
             Intent intent2 = new Intent(this, ShowPosts.class);
             startActivity(intent2);

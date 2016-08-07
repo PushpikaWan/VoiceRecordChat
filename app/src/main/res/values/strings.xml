@@ -43,4 +43,6 @@
     <string name="download">Download</string>
     <string name="add_reply">Add Reply</string>
     <string name="view_replies">View Replies</string>
+    <string name="my_posts">My Posts</string>
+    <string name="notification">Notification</string>
 </resources>

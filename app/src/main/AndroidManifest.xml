@@ -50,6 +50,7 @@
             android:name=".StreamingMp3PlayerComments"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".UserProfile" />
+        <activity android:name=".NotificationShow"></activity>
     </application>
 
 </manifest>
