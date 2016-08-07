@@ -61,27 +61,23 @@ public class UserHomePage extends AppCompatActivity {
                 if(itemPosition==0){
                     Current_Category="Sport";
                     startActivity(intent1);
-                    finish();
+
                 }
                 else if(itemPosition==1){
                     Current_Category="Educational";
                     startActivity(intent1);
-                    finish();
                 }
                 else if (itemPosition==2){
                     Current_Category="Entertainment";
                     startActivity(intent1);
-                    finish();
                 }
                 else if (itemPosition==3){
                     Current_Category="Political";
                     startActivity(intent1);
-                    finish();
                 }
                 else if (itemPosition==4){
                     Current_Category="Profile";
                     startActivity(intent2);
-                    finish();
                 }
 
             }

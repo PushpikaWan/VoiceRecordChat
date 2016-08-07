@@ -45,11 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        SharedPreferences settings1 = getSharedPreferences("prefs", 0);
-        SharedPreferences.Editor editor = settings1.edit();
-        editor.putBoolean("firstRun", false);
-        editor.commit();
-
         if(!firstRun){
             Intent intent = new Intent(this,UserHomePage.class);
             startActivity(intent);

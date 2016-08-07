@@ -46,12 +46,14 @@ public class SelectType extends AppCompatActivity {
     public void go_record(View view){
         Intent intent1 = new Intent(this,AddPost.class);
         startActivity(intent1);
+        finish();
     }
 
     public void go_listen(View view){
         if(!waiting) {
             Intent intent2 = new Intent(this, ShowPosts.class);
             startActivity(intent2);
+            finish();
         }
         else{
             Toast.makeText(getApplicationContext(), "Page loading,Please wait...", Toast.LENGTH_LONG).show();

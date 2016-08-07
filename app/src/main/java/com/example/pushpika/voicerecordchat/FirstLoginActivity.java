@@ -95,6 +95,7 @@ public class FirstLoginActivity extends AppCompatActivity {
                     editor.putString("User_ID",User_ID);
                     editor.putString("User_Name",User_Name);
                     editor.putString("Email_Address",Email_Address);
+                    editor.putBoolean("firstRun", false);
                     editor.commit();
 
                     MainActivity.User_ID = User_ID;
@@ -155,5 +156,6 @@ public class FirstLoginActivity extends AppCompatActivity {
     private void after_data_get() {
         final Intent intent1 = new Intent(this,UserHomePage.class);
         startActivity(intent1);
+        finish();
     }
 }

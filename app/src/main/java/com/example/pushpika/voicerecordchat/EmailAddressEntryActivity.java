@@ -37,6 +37,7 @@ public class EmailAddressEntryActivity extends AppCompatActivity {
             EmailAddressEntryActivity.EmailAddress = tempEmailAddress;
             Intent intent = new Intent(this,UserRegister.class);
             startActivity(intent);
+            finish();
         }
 
     }

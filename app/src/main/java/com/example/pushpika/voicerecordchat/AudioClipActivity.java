@@ -61,6 +61,7 @@ public class AudioClipActivity extends AppCompatActivity {
     public void Reply(View view){
         Intent intent2 = new Intent(this,ReplyMethods.class);
         startActivity(intent2);
+        finish();
     }
 
     public void Like(View view){
