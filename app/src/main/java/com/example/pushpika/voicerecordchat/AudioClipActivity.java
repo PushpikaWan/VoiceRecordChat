@@ -214,6 +214,8 @@ public class AudioClipActivity extends AppCompatActivity {
             mAuthTask = null;
             //showProgress(false);
 
+            Toast.makeText(getApplicationContext(), "Your like will be shown after refresh posts", Toast.LENGTH_LONG).show();
+
 
             if (success) {
 
@@ -221,7 +223,7 @@ public class AudioClipActivity extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(getApplicationContext(), "data sending error.. already liked", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "data sending error.. already liked", Toast.LENGTH_LONG).show();
 
                 try {
                     Thread.sleep(100);

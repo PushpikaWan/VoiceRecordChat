@@ -53,7 +53,7 @@ public class UserProfile extends AppCompatActivity {
 
     public void go_my_posts(View view){
         if(!waiting) {
-            Intent intent2 = new Intent(this, ShowPosts.class);
+            Intent intent2 = new Intent(this,MyPosts.class);
             startActivity(intent2);
         }
         else{

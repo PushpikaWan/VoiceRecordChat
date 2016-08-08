@@ -45,4 +45,7 @@
     <string name="view_replies">View Replies</string>
     <string name="my_posts">My Posts</string>
     <string name="notification">Notification</string>
+    <string name="delete_post">Delete Post</string>
+    <string name="likes">Likes</string>
+    <string name="comments">Comments</string>
 </resources>

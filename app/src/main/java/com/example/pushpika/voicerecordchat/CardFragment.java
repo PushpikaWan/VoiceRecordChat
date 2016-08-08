@@ -161,7 +161,7 @@ public class CardFragment extends Fragment {
             likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
             goAudioBtn = (Button)v.findViewById(R.id.GoClipBtn);
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
-            likeImageView.setOnClickListener(new View.OnClickListener() {
+  /*          likeImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -186,7 +186,7 @@ public class CardFragment extends Fragment {
                 }
             });
 
-
+*/
 
             shareImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
