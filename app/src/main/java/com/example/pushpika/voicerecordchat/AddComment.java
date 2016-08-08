@@ -57,7 +57,7 @@ public class AddComment extends AppCompatActivity {
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
-
+    File rootDir = Environment.getExternalStorageDirectory();
     Button play, stop, record,post;
     private MediaRecorder myAudioRecorder;
     private String outputFile = null;
@@ -87,11 +87,12 @@ public class AddComment extends AppCompatActivity {
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
+        checkAndCreateDirectory("/Kawulu_audio");
 
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         currentDateTimeString = s.format(new Date());
         fileName =MainActivity.User_ID+currentDateTimeString;
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName+".mp3";
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Kawulu_audio/"+fileName+".mp3";
         selectedFilePath = outputFile;
 
         //
@@ -203,6 +204,14 @@ public class AddComment extends AppCompatActivity {
             Toast.makeText(AddComment.this,"Please choose a File First",Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    //function to verify if directory exists
+    public void checkAndCreateDirectory(String dirName){
+        File new_dir = new File( rootDir + dirName );
+        if( !new_dir.exists() ){
+            new_dir.mkdirs();
+        }
     }
     //android upload file to server
     public int uploadFile(final String selectedFilePath){

@@ -27,8 +27,8 @@
 
                 <ImageView
                     android:id="@+id/coverImageView"
-                    android:layout_width="129dp"
-                    android:layout_height="129dp"
+                    android:layout_width="164dp"
+                    android:layout_height="164dp"
                     android:layout_gravity="left"
                     android:scaleType="centerCrop"
                     />
@@ -89,7 +89,7 @@
 
                 <TextView
                     android:id="@+id/titleTextView"
-                    android:layout_width="124dp"
+                    android:layout_width="155dp"
                     android:layout_height="69dp"
                     android:padding="16dp"
                     android:textSize="18sp"

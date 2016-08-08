@@ -2,22 +2,30 @@ package com.example.pushpika.voicerecordchat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     public static String WEB_SERVER="http://mywall.esy.es/";
     public static String User_ID,User_Name,Email_Address;
+    File rootDir = Environment.getExternalStorageDirectory();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //making sure the download directory exists
+        checkAndCreateDirectory("/Kawulu_audio");
+
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         boolean firstRun = settings.getBoolean("firstRun", true);
@@ -53,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    //function to verify if directory exists
+    public void checkAndCreateDirectory(String dirName){
+        File new_dir = new File( rootDir + dirName );
+        if( !new_dir.exists() ){
+            new_dir.mkdirs();
+        }
     }
 
 

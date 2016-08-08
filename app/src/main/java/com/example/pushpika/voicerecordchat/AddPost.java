@@ -53,7 +53,7 @@ public class AddPost extends AppCompatActivity {
     private long startTime = 0L;
 
     private Handler customHandler = new Handler();
-
+    File rootDir = Environment.getExternalStorageDirectory();
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -87,11 +87,12 @@ public class AddPost extends AppCompatActivity {
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
+        checkAndCreateDirectory("/Kawulu_audio");
 
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         currentDateTimeString = s.format(new Date());
         fileName =MainActivity.User_ID+currentDateTimeString;
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+fileName+".mp3";
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Kawulu_audio/"+fileName+".mp3";
         selectedFilePath = outputFile;
 
         //
@@ -165,6 +166,14 @@ public class AddPost extends AppCompatActivity {
         });
     }
 
+
+    //function to verify if directory exists
+    public void checkAndCreateDirectory(String dirName){
+        File new_dir = new File( rootDir + dirName );
+        if( !new_dir.exists() ){
+            new_dir.mkdirs();
+        }
+    }
 
     private Runnable updateTimerThread = new Runnable() {
 
