@@ -85,4 +85,10 @@ public class UserHomePage extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+
 }

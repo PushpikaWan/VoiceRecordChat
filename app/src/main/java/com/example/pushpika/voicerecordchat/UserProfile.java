@@ -46,6 +46,15 @@ public class UserProfile extends AppCompatActivity {
 
         }
 
+    @Override
+    public void onBackPressed() {
+
+        final Intent intent = new Intent(this, UserHomePage.class);
+        startActivity(intent);
+        finish();
+    }
+
+
     public void go_notification(View view){
         Intent intent1 = new Intent(this,NotificationShow.class);
         startActivity(intent1);
