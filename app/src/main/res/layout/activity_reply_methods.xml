@@ -10,29 +10,29 @@
     tools:context="com.example.pushpika.voicerecordchat.ReplyMethods">
 
     <Button android:id="@+id/AddReplyBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="45dp"
+        android:layout_width="match_parent" android:layout_height="60dp"
         android:text="@string/add_reply"
         android:textStyle="bold"
         android:onClick="add_reply"
         android:textColor="#fff"
-        android:background="#21cc60"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:background="#0d2d53"
+        android:textSize="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp" />
 
     <Button android:id="@+id/ViewReplyBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="45dp"
+        android:layout_width="match_parent" android:layout_height="60dp"
         android:text="@string/view_replies"
         android:textStyle="bold"
         android:onClick="view_reply"
-        android:layout_below="@+id/AddReplyBtn"
-        android:textColor="#fff"
-        android:background="#b5cc21"
-        android:layout_centerVertical="true"
+        android:textColor="#0b0b0b"
+        android:background="#21ccc6"
+        android:layout_marginBottom="56dp"
+        android:textSize="40dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

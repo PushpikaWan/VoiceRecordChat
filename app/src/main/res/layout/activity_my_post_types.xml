@@ -11,13 +11,14 @@
 
 
     <Button android:id="@+id/RecordBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="45dp"
+        android:layout_width="match_parent" android:layout_height="60dp"
         android:text="@string/delete_post"
         android:textStyle="bold"
         android:onClick="delete_post"
         android:textColor="#fff"
-        android:background="#cc2121"
-        android:layout_marginTop="60dp"/>
+        android:background="#0d2d53"
+        android:layout_marginTop="60dp"
+        android:textSize="40dp" />
 
     <!--
     <Button android:id="@+id/ListenBtn" style="?android:textAppearanceSmall"

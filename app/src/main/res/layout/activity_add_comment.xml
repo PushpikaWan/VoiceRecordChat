@@ -37,7 +37,7 @@
         android:text="@string/post"
         android:textStyle="bold"
         android:onClick="post"
-        android:textColor="#fff"
+        android:textColor="#040404"
         android:background="#21ccc6"
         android:layout_weight="5"
         android:layout_alignParentBottom="true"
@@ -87,7 +87,8 @@
         android:layout_marginBottom="66dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:allowUndo="true" />
 
     <TextView
         android:id="@+id/timerValue"

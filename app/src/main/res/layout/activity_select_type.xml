@@ -10,27 +10,26 @@
     tools:context="com.example.pushpika.voicerecordchat.SelectType">
 
     <Button android:id="@+id/RecordBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="45dp"
+        android:layout_width="match_parent" android:layout_height="80dp"
         android:text="@string/record_b"
         android:textStyle="bold"
         android:onClick="go_record"
         android:textColor="#fff"
-        android:background="#cc2121"
-        android:layout_marginTop="60dp"/>
+        android:background="#0d2d53"
+        android:layout_marginTop="60dp"
+        android:textSize="40dp" />
 
     <Button android:id="@+id/ListenBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="45dp"
+        android:layout_width="match_parent" android:layout_height="80dp"
         android:text="@string/listen"
         android:textStyle="bold"
         android:onClick="go_listen"
-        android:textColor="#fff"
-        android:background="#21cc60"
-        android:layout_below="@+id/RecordBtn"
-        android:layout_centerVertical="true"
+        android:textColor="#080808"
+        android:background="#21ccc6"
+        android:textSize="40dp"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="120dp"/>
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
