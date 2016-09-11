@@ -25,45 +25,35 @@
         android:text="@string/reply"
         android:textStyle="bold"
         android:onClick="Reply"
-        android:layout_below="@+id/PlayBtn"
         android:textColor="#fff"
         android:background="#b5cc21"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/PlayBtn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_alignParentStart="true" />
 
     <Button android:id="@+id/LikeBtn" style="?android:textAppearanceSmall"
         android:layout_width="match_parent" android:layout_height="45dp"
         android:text="@string/like"
         android:textStyle="bold"
         android:onClick="Like"
-        android:layout_below="@+id/ReplyBtn"
         android:textColor="#fff"
         android:background="#2185cc"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_alignParentStart="true" />
 
     <Button android:id="@+id/DownloadBtn" style="?android:textAppearanceSmall"
         android:layout_width="match_parent" android:layout_height="45dp"
         android:text="@string/download"
         android:textStyle="bold"
         android:onClick="Download"
-        android:layout_below="@+id/LikeBtn"
         android:textColor="#fff"
         android:background="#8d21cc"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginBottom="71dp" />
 
 
 </RelativeLayout>
