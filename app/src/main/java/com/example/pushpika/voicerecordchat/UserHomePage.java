@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 public class UserHomePage extends AppCompatActivity {
 
-    ListView listView;
     public static String Current_Category;
+    private Intent intent1;
+    private Intent intent2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,69 +22,46 @@ public class UserHomePage extends AppCompatActivity {
 
 
         //intent declaration
-        final Intent intent1 = new Intent(this,SelectType.class);
-        final Intent intent2 = new Intent(this,UserProfile.class);
+        intent1 = new Intent(this,SelectType.class);
+        intent2 = new Intent(this,UserProfile.class);
 
-        // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list);
-
-        // Defined Array values to show in ListView
-        String[] values = new String[]{"Sport",
-                "Educational",
-                "Entertainment",
-                "Political",
-                "Profile"
-        };
-
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) listView.getItemAtPosition(position);
-
-
-                if(itemPosition==0){
-                    Current_Category="Sport";
-                    startActivity(intent1);
-
-                }
-                else if(itemPosition==1){
-                    Current_Category="Educational";
-                    startActivity(intent1);
-                }
-                else if (itemPosition==2){
-                    Current_Category="Entertainment";
-                    startActivity(intent1);
-                }
-                else if (itemPosition==3){
-                    Current_Category="Political";
-                    startActivity(intent1);
-                }
-                else if (itemPosition==4){
-                    Current_Category="Profile";
-                    startActivity(intent2);
-                }
-
-            }
-
-        });
     }
+
+    public void sports_click(View view){
+        Current_Category="Sports";
+        startActivity(intent1);
+    }
+
+    public void educational_click(View view){
+        Current_Category="Educational";
+        startActivity(intent1);
+    }
+
+    public void entertainment_click(View view){
+        Current_Category="Entertainment";
+        startActivity(intent1);
+    }
+
+    public void political_click(View view){
+        Current_Category="Political";
+        startActivity(intent1);
+    }
+
+    public void innovations_click(View view){
+        Current_Category="Innovations";
+        startActivity(intent1);
+    }
+
+    public void others_click(View view){
+        Current_Category="Others";
+        startActivity(intent1);
+    }
+
+    public void profile_click(View view){
+        Current_Category="Profile";
+        startActivity(intent2);
+    }
+
 
     @Override
     public void onBackPressed() {

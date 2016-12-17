@@ -7,12 +7,86 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.pushpika.voicerecordchat.UserHomePage">
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_height="400dp"
-        android:layout_width="match_parent">
-    </ListView>
+
+    <Button
+        android:id="@+id/sports_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/sports"
+        android:textStyle="bold"
+        android:onClick="sports_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/educational_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="@string/educational"
+        android:textStyle="bold"
+        android:onClick="educational_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/entertainment_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="Entertainment"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:onClick="entertainment_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/political_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/political"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:onClick="political_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/innovation_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="Innovations"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:onClick="innovations_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/others_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="Others"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:onClick="others_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
+
+    <Button android:id="@+id/profile_btn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="Profile"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:onClick="profile_click"
+        android:textColor="#fff"
+        android:background="#0d2d53"
+        android:layout_marginTop="20dp"
+        android:textSize="40dp" />
 
 </LinearLayout>

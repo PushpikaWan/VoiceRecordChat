@@ -48,4 +48,7 @@
     <string name="delete_post">Delete Post</string>
     <string name="likes">Likes</string>
     <string name="comments">Comments</string>
+    <string name="sports">Sports</string>
+    <string name="educational">Educational</string>
+    <string name="political">Political</string>
 </resources>
