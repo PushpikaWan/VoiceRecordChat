@@ -16,6 +16,7 @@ public class EmailAddressEntryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Login");
         setContentView(R.layout.activity_email_address_entry);
         email_entry = (EditText) findViewById(R.id.Email_address);
     }

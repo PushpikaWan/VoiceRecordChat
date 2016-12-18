@@ -10,6 +10,7 @@ public class ReplyMethods extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Reply");
         setContentView(R.layout.activity_reply_methods);
     }
 

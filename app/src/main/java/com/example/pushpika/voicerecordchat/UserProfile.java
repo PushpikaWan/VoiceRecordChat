@@ -39,6 +39,7 @@ public class UserProfile extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setTitle("My Profile");
             setContentView(R.layout.activity_user_profile);
             waiting = true;
             mAuthTask = new LoadPostsMY();

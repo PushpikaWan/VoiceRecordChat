@@ -18,6 +18,7 @@ public class UserHomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Categories");
         setContentView(R.layout.activity_user_home_page);
 
 

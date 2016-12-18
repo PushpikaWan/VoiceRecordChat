@@ -5,6 +5,9 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -36,6 +39,7 @@ public class voiceCapture extends Activity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setTitle("Record");
             setContentView(R.layout.activity_voice_capture);
 
             play = (Button) findViewById(R.id.button3);
@@ -59,6 +63,13 @@ public class voiceCapture extends Activity {
                     try {
                         myAudioRecorder.prepare();
                         myAudioRecorder.start();
+                        try {
+                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                            r.play();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } catch (IllegalStateException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -70,7 +81,7 @@ public class voiceCapture extends Activity {
                     record.setEnabled(false);
                     stop.setEnabled(true);
 
-                    Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -84,7 +95,14 @@ public class voiceCapture extends Activity {
                     stop.setEnabled(false);
                     play.setEnabled(true);
 
-                    Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+                    try {
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                        r.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
                 }
             });
 

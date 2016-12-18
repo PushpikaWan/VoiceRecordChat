@@ -42,6 +42,7 @@ public class ViewComments extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Comments");
         Log.v(" record list","open View comment" );
         mAuthTask = new LoadComments();
         mAuthTask.execute((Void) null);

@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -75,6 +78,7 @@ public class AddPost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Add Post");
         setContentView(R.layout.activity_add_post);
         timerValue = (TextView) findViewById(R.id.timerValue);
         play = (Button) findViewById(R.id.play_btn);
@@ -87,6 +91,8 @@ public class AddPost extends AppCompatActivity {
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
+        stop.setVisibility(View.GONE);
+        play.setVisibility(View.GONE);
         checkAndCreateDirectory("/Kawulu_audio");
 
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -110,7 +116,13 @@ public class AddPost extends AppCompatActivity {
                     myAudioRecorder.start();
                     startTime = SystemClock.uptimeMillis();
                     customHandler.postDelayed(updateTimerThread, 0);
-
+                    try {
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                        r.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (IllegalStateException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -121,8 +133,9 @@ public class AddPost extends AppCompatActivity {
 
                 record.setEnabled(false);
                 stop.setEnabled(true);
-
-                Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
+                stop.setVisibility(View.VISIBLE);
+                record.setVisibility(View.GONE);
+               // Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -137,9 +150,18 @@ public class AddPost extends AppCompatActivity {
 
                 stop.setEnabled(false);
                 play.setEnabled(true);
+                play.setVisibility(View.VISIBLE);
                 post.setVisibility(View.VISIBLE);
+                stop.setVisibility(View.GONE);
 
-                Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+                try {
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
             }
         });
 

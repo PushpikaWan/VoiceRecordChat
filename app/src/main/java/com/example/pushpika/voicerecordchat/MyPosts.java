@@ -45,6 +45,7 @@ public class MyPosts extends AppCompatActivity {
      @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setTitle("My Posts");
             //Log.v(" record list","open View comment" );
             mAuthTask = new LoadMyPosts();
             mAuthTask.execute((Void) null);

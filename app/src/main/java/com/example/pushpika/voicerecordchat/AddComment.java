@@ -1,5 +1,8 @@
 package com.example.pushpika.voicerecordchat;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.ProgressDialog;
@@ -75,6 +78,7 @@ public class AddComment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Comments");
         setContentView(R.layout.activity_add_comment);
         timerValue = (TextView) findViewById(R.id.timerValue);
         play = (Button) findViewById(R.id.play_btn);
@@ -87,6 +91,8 @@ public class AddComment extends AppCompatActivity {
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
+        play.setVisibility(View.GONE);
+        stop.setVisibility(View.GONE);
         checkAndCreateDirectory("/Kawulu_audio");
 
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -110,6 +116,13 @@ public class AddComment extends AppCompatActivity {
                     myAudioRecorder.start();
                     startTime = SystemClock.uptimeMillis();
                     customHandler.postDelayed(updateTimerThread, 0);
+                    try {
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                        r.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 } catch (IllegalStateException e) {
                     // TODO Auto-generated catch block
@@ -120,9 +133,11 @@ public class AddComment extends AppCompatActivity {
                 }
 
                 record.setEnabled(false);
+                record.setVisibility(View.GONE);
+                stop.setVisibility(View.VISIBLE);
                 stop.setEnabled(true);
 
-                Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -136,10 +151,18 @@ public class AddComment extends AppCompatActivity {
                 customHandler.removeCallbacks(updateTimerThread);
 
                 stop.setEnabled(false);
+                stop.setVisibility(View.GONE);
                 play.setEnabled(true);
+                play.setVisibility(View.VISIBLE);
                 post.setVisibility(View.VISIBLE);
-
-                Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+                try {
+                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -36,6 +36,7 @@ public class MyPostTypes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("My Posts");
         setContentView(R.layout.activity_my_post_types);
     }
 

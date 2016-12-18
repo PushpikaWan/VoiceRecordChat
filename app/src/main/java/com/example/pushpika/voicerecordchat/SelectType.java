@@ -36,6 +36,7 @@ public class SelectType extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Types");
         setContentView(R.layout.activity_select_type);
         waiting = true;
         mAuthTask = new LoadPosts();
