@@ -26,54 +26,30 @@
         android:id="@+id/editText"
         android:layout_below="@id/title"/>
 
-
-    <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/editText"
-       android:id="@+id/linear_1">
-
        <Button android:id="@+id/record_btn" style="?android:textAppearanceSmall"
-       android:layout_width="match_parent" android:layout_height="60dp"
-       android:layout_marginTop="16dp" android:text="@string/record"
+       android:layout_width="match_parent"
+           android:layout_height="60dp"
+       android:layout_marginTop="16dp"
+           android:text="@string/record"
            android:layout_marginRight="10dp"
        android:textStyle="bold"
            android:layout_margin="5dp"
-       android:onClick="record"
+           android:layout_below="@id/editText"
        android:textColor="#fff"
        android:background="#f8fb9a09"
            android:layout_weight="5"
            android:textSize="40dp" />
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/linear_1"
-        android:layout_marginTop="20dp"
-        android:id="@+id/linear_2">
-
-
-    </LinearLayout>
-
-    <Button android:id="@+id/stop_btn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="@string/stop"
-        android:textStyle="bold"
-        android:onClick="stop"
-        android:textColor="#fff"
-        android:background="#8221cc"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:textSize="30dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/timerValue"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:textSize="35sp"
+        android:textColor="#201d1d"
+        android:text="@string/timerVal"
+        android:layout_weight="3"
+        android:layout_below="@+id/record_btn"
+        android:layout_centerHorizontal="true" />
 
     <Button android:id="@+id/play_btn" style="?android:textAppearanceSmall"
         android:layout_width="fill_parent" android:layout_height="60dp"
@@ -84,8 +60,8 @@
         android:background="#0d2d53"
         android:textSize="30dp"
         android:layout_alignWithParentIfMissing="false"
+        android:layout_below="@id/timerValue"
         android:layout_margin="5dp"
-        android:layout_below="@+id/stop_btn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -102,17 +78,6 @@
         android:layout_below="@+id/play_btn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/timerValue"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:textSize="35sp"
-        android:textColor="#201d1d"
-        android:text="@string/timerVal"
-        android:layout_weight="3"
-        android:layout_below="@+id/linear_2"
-        android:layout_centerHorizontal="true" />
 
     <Button android:id="@+id/post_btn" style="?android:textAppearanceSmall"
         android:layout_width="fill_parent" android:layout_height="60dp"

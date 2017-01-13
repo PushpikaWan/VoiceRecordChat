@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -64,7 +65,7 @@ public class AddPost extends AppCompatActivity {
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
 
-    Button play, stop, record,post,delete;
+    Button play, record,post,delete;
     TextView title;
     private MediaRecorder myAudioRecorder;
     private String outputFile = null;
@@ -76,6 +77,7 @@ public class AddPost extends AppCompatActivity {
     public static final int CONNECTION_TIMEOUT = 1000*15;
     public String currentDateTimeString;
     public  String fileName ;
+    private boolean isRecordStarted;
 
 
 
@@ -86,18 +88,15 @@ public class AddPost extends AppCompatActivity {
         setContentView(R.layout.activity_add_post);
         timerValue = (TextView) findViewById(R.id.timerValue);
         play = (Button) findViewById(R.id.play_btn);
-        stop = (Button) findViewById(R.id.stop_btn);
         record = (Button) findViewById(R.id.record_btn);
         post = (Button)findViewById(R.id.post_btn);
         delete = (Button) findViewById(R.id.delete_btn);
         title_text = (EditText) findViewById(R.id.editText);
         title = (TextView) findViewById(R.id.title);
 
-        stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
         delete.setVisibility(View.GONE);
-        stop.setVisibility(View.GONE);
         play.setVisibility(View.GONE);
         checkAndCreateDirectory("/Kawulu_audio");
 
@@ -113,69 +112,36 @@ public class AddPost extends AppCompatActivity {
         myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
         myAudioRecorder.setOutputFile(outputFile);
+        isRecordStarted = false;
 
-        record.setOnClickListener(new View.OnClickListener() {
+        record.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if(title_text.equals("") || TextUtils.isEmpty(title_text.getText().toString().trim())){
-                    title_text.setError(getString(R.string.error_field_required));
-                    return;
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        startRecord();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL:
+                        v.setPressed(false);
+                        if(isRecordStarted){
+                            stopRecord();
+                        }
+                        // Stop action ...
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
                 }
-                try {
-                    myAudioRecorder.prepare();
-                    myAudioRecorder.start();
-                    startTime = SystemClock.uptimeMillis();
-                    customHandler.postDelayed(updateTimerThread, 0);
-                    try {
-                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                        r.play();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } catch (IllegalStateException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
 
-                title_text.setVisibility(View.GONE);
-                title.setVisibility(View.GONE);
-                record.setEnabled(false);
-                stop.setEnabled(true);
-                stop.setVisibility(View.VISIBLE);
-                record.setVisibility(View.GONE);
-               // Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myAudioRecorder.stop();
-                myAudioRecorder.release();
-                myAudioRecorder = null;
-                timeSwapBuff += timeInMilliseconds;
-                customHandler.removeCallbacks(updateTimerThread);
-
-                stop.setEnabled(false);
-                play.setEnabled(true);
-                play.setVisibility(View.VISIBLE);
-                delete.setVisibility(View.VISIBLE);
-                post.setVisibility(View.VISIBLE);
-                stop.setVisibility(View.GONE);
-                timerValue.setVisibility(View.GONE);
-
-                try {
-                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                    r.play();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                //Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+                return true;
             }
         });
 
@@ -252,6 +218,64 @@ public class AddPost extends AppCompatActivity {
             Toast.makeText(AddPost.this,"File deleting error",Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void startRecord(){
+        if(title_text.equals("") || TextUtils.isEmpty(title_text.getText().toString().trim())){
+            title_text.setError(getString(R.string.error_field_required));
+            Toast.makeText(AddPost.this,"Set a title before recording",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        isRecordStarted =true;
+        try {
+            myAudioRecorder.prepare();
+            myAudioRecorder.start();
+            startTime = SystemClock.uptimeMillis();
+            customHandler.postDelayed(updateTimerThread, 0);
+            try {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        title_text.setVisibility(View.GONE);
+        title.setVisibility(View.GONE);
+        // Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
+    }
+
+    public void stopRecord(){
+        myAudioRecorder.stop();
+        myAudioRecorder.release();
+        myAudioRecorder = null;
+        timeSwapBuff += timeInMilliseconds;
+        customHandler.removeCallbacks(updateTimerThread);
+
+        play.setEnabled(true);
+        play.setVisibility(View.VISIBLE);
+        delete.setVisibility(View.VISIBLE);
+        post.setVisibility(View.VISIBLE);
+        timerValue.setVisibility(View.GONE);
+        record.setVisibility(View.GONE);
+
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+
+    }
+
     public void post(View view){
         //on upload button Click
         if(selectedFilePath != null){

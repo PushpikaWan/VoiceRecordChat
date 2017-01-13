@@ -132,6 +132,7 @@ public class CardFragment extends Fragment {
         public TextView author;
         public TextView hiddenTextView1;
         public TextView hiddenTextView2;
+        public TextView comment_txt;
         public TextView likes;
         public TextView comments;
         public ImageView coverImageView;
@@ -153,6 +154,7 @@ public class CardFragment extends Fragment {
             likeImageView = (ImageView) v.findViewById(R.id.likeImageView);
             goAudioBtn = (Button)v.findViewById(R.id.GoClipBtn);
             shareImageView = (ImageView) v.findViewById(R.id.shareImageView);
+            comment_txt = (TextView) v.findViewById(R.id.comment_text);
   /*          likeImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -180,7 +182,7 @@ public class CardFragment extends Fragment {
 
 */
 
-            shareImageView.setOnClickListener(new View.OnClickListener() {
+            comment_txt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -195,10 +197,17 @@ public class CardFragment extends Fragment {
                     shareIntent.putExtra(Intent.EXTRA_STREAM,imageUri);
                     shareIntent.setType("image/jpeg");
                     startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+                    */
+                    String title = titleTextView.getText().toString();
+                    String category = UserHomePage.Current_Category;
+                    String postid = hiddenTextView2.getText().toString() ;
+                    String audioid = hiddenTextView1.getText().toString();
 
-*/
-
-                }
+                    Log.v("share image clicked: ",title+" "+category+" "+postid+" "+audioid+" ");
+                    audioClipObject = new AudioClipObject(title,category,postid,audioid);
+                        Intent intent2 = new Intent(getActivity(),ReplyMethods.class);
+                        startActivity(intent2);
+                    }
             });
 
             goAudioBtn.setOnClickListener(new View.OnClickListener() {
@@ -221,8 +230,6 @@ public class CardFragment extends Fragment {
         }
 
     }
-
-
 
     public void initializeList() {
         listitems.clear();
