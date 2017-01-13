@@ -15,7 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -61,7 +64,8 @@ public class AddPost extends AppCompatActivity {
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
 
-    Button play, stop, record,post;
+    Button play, stop, record,post,delete;
+    TextView title;
     private MediaRecorder myAudioRecorder;
     private String outputFile = null;
     private String selectedFilePath;
@@ -85,12 +89,14 @@ public class AddPost extends AppCompatActivity {
         stop = (Button) findViewById(R.id.stop_btn);
         record = (Button) findViewById(R.id.record_btn);
         post = (Button)findViewById(R.id.post_btn);
+        delete = (Button) findViewById(R.id.delete_btn);
         title_text = (EditText) findViewById(R.id.editText);
-
+        title = (TextView) findViewById(R.id.title);
 
         stop.setEnabled(false);
         play.setEnabled(false);
         post.setVisibility(View.GONE);
+        delete.setVisibility(View.GONE);
         stop.setVisibility(View.GONE);
         play.setVisibility(View.GONE);
         checkAndCreateDirectory("/Kawulu_audio");
@@ -111,6 +117,10 @@ public class AddPost extends AppCompatActivity {
         record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(title_text.equals("") || TextUtils.isEmpty(title_text.getText().toString().trim())){
+                    title_text.setError(getString(R.string.error_field_required));
+                    return;
+                }
                 try {
                     myAudioRecorder.prepare();
                     myAudioRecorder.start();
@@ -131,6 +141,8 @@ public class AddPost extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                title_text.setVisibility(View.GONE);
+                title.setVisibility(View.GONE);
                 record.setEnabled(false);
                 stop.setEnabled(true);
                 stop.setVisibility(View.VISIBLE);
@@ -151,8 +163,10 @@ public class AddPost extends AppCompatActivity {
                 stop.setEnabled(false);
                 play.setEnabled(true);
                 play.setVisibility(View.VISIBLE);
+                delete.setVisibility(View.VISIBLE);
                 post.setVisibility(View.VISIBLE);
                 stop.setVisibility(View.GONE);
+                timerValue.setVisibility(View.GONE);
 
                 try {
                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -197,6 +211,14 @@ public class AddPost extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_bar, menu);
+        return true;
+
+    }
+
     private Runnable updateTimerThread = new Runnable() {
 
         public void run() {
@@ -218,6 +240,18 @@ public class AddPost extends AppCompatActivity {
     };
 
 
+    public void delete(View view){
+        if(selectedFilePath != null){
+            File file = new File(selectedFilePath);
+            file.delete();
+            finish();
+            Intent intent = new Intent(this,AddPost.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(AddPost.this,"File deleting error",Toast.LENGTH_SHORT).show();
+        }
+    }
     public void post(View view){
         //on upload button Click
         if(selectedFilePath != null){
@@ -380,8 +414,6 @@ public class AddPost extends AppCompatActivity {
         View focusView = null;
 
 
-
-
 ///contacts shouldn`t be empty
         // Check for valid first name.
         if (TextUtils.isEmpty(Title)) {
@@ -467,7 +499,22 @@ public class AddPost extends AppCompatActivity {
 
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
+            case R.id.action_home:
+                finish();
+                Intent intent = new Intent(this,UserHomePage.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
 }

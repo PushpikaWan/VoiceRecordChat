@@ -48,11 +48,6 @@ public class UserRegister extends AppCompatActivity{
         bRegister = (Button) findViewById(R.id.bRegister);
     }
 
-
-
-
-
-
     @Override
     public void onBackPressed() {
         //

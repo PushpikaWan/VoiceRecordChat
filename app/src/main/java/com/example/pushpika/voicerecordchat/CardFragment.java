@@ -44,18 +44,11 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 
-
 public class CardFragment extends Fragment {
-
 
     ArrayList<PostModule> listitems = new ArrayList<>();
     RecyclerView MyRecyclerView;
     public static AudioClipObject audioClipObject;
-
-
-
-
-
 
 
     @Override
@@ -63,8 +56,6 @@ public class CardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         initializeList();
         getActivity().setTitle(UserHomePage.Current_Category+" Posts");
-
-
 
     }
 
@@ -84,6 +75,7 @@ public class CardFragment extends Fragment {
 
         return view;
     }
+
 
 
 

@@ -52,4 +52,6 @@
     <string name="educational">Educational</string>
     <string name="political">Political</string>
     <string name="like_">Like</string>
+    <string name="delete">delete</string>
+    <string name="home">home</string>
 </resources>

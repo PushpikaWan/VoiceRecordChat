@@ -1,6 +1,7 @@
 package com.example.pushpika.voicerecordchat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 
@@ -130,19 +131,30 @@ public class voiceCapture extends Activity {
         }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_bar, menu);
+        return true;
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
+    }
 
-            int id = item.getItemId();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
+            case R.id.action_home:
+                finish();
+                Intent intent = new Intent(this,UserHomePage.class);
+                startActivity(intent);
                 return true;
-            }
-            return super.onOptionsItemSelected(item);
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
     }
+
+}
