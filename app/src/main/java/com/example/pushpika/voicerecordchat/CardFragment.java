@@ -41,7 +41,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class CardFragment extends Fragment {
@@ -243,7 +245,7 @@ public class CardFragment extends Fragment {
                 item.setImageResourceId(SelectType.current_post_object_set.Image_List.get(i));
                 item.setCardName2(SelectType.current_post_object_set.Audio_Name_List.get(i));
                 item.setCardName3(SelectType.current_post_object_set.Post_ID_List.get(i));
-                item.setCardName4(SelectType.current_post_object_set.User_Name_List.get(i));
+                item.setCardName4(SelectType.current_post_object_set.User_Name_List.get(i)+"\n"+toDate(SelectType.current_post_object_set.Date_Time_List.get(i)));
                 item.setCardName5(SelectType.current_post_object_set.Like_Count_List.get(i));
                 item.setCardName6(SelectType.current_post_object_set.Comment_Count_List.get(i));
 
@@ -262,7 +264,11 @@ public class CardFragment extends Fragment {
     }
 
     //download from server
-
+    private String toDate(String timestamp) {
+        if (timestamp.length()<8) return "";
+        String date = timestamp.substring(4,8)+"-"+ timestamp.substring(2,4)+"-"+timestamp.substring(0,2);
+        return date;
+    }
 
     }
 

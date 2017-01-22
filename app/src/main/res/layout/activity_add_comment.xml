@@ -34,7 +34,7 @@
 
     <Button android:id="@+id/record_btn" style="?android:textAppearanceSmall"
         android:layout_width="194dp" android:layout_height="75dp"
-        android:text="@string/record"
+        android:text="@string/record_b"
         android:textStyle="bold"
         android:onClick="record"
         android:textColor="#ffffff"
