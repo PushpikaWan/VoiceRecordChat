@@ -147,7 +147,7 @@ public class MyPostTypes extends AppCompatActivity {
 
 
             if (success) {
-
+                Toast.makeText(getApplicationContext(), "Post deleted successfully", Toast.LENGTH_LONG).show();
                 load_view();
 
             } else {

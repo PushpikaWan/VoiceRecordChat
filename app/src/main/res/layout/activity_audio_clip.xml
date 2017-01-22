@@ -28,22 +28,9 @@
         android:onClick="Reply"
         android:textColor="#fff"
         android:background="#0d2d53"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/LikeBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="40dp" />
-
-    <Button android:id="@+id/LikeBtn" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="@string/like_"
-        android:textStyle="bold"
-        android:onClick="Like"
-        android:textColor="#fff"
-        android:background="#8221cc"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="12dp"
         android:textSize="40dp"
-        android:layout_below="@+id/PlayBtn"
+        android:layout_below="@+id/LikeBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -54,10 +41,24 @@
         android:onClick="Download"
         android:textColor="#080808"
         android:background="#21ccc6"
-        android:layout_alignParentBottom="true"
+        android:textSize="30dp"
+        android:layout_below="@+id/ReplyBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="30dp" />
+        android:layout_marginTop="13dp" />
+
+    <Button android:id="@+id/LikeBtn" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="60dp"
+        android:text="@string/like_"
+        android:textStyle="bold"
+        android:onClick="Like"
+        android:textColor="#fff"
+        android:background="#8221cc"
+        android:layout_marginTop="13dp"
+        android:textSize="40dp"
+        android:layout_below="@+id/PlayBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

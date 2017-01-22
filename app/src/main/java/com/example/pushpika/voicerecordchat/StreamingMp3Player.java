@@ -26,6 +26,7 @@ public class StreamingMp3Player extends Activity implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Click to play");
         setContentView(R.layout.activity_streaming_mp3_player);
         initView();
     }

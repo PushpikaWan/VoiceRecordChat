@@ -26,9 +26,9 @@
         android:onClick="go_my_posts"
         android:textColor="#0e0e0e"
         android:background="#21ccc6"
-        android:layout_marginBottom="48dp"
         android:textSize="40dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/NotificationBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
